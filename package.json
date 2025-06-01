@@ -1,0 +1,22 @@
+{
+  "name": "javascript-review-brittliban",
+  "version": "1.0.0",
+  "description": "- Do not change anything in the index.html or CSS.\r - Most of your code will go in index.js. Do not change anything in the logic.js file.\r - Do not manually modify the existing reviews array. However, you may add new reviews to the array using JavaScript.\r - The images folder contains images for the midterm. Feel free to add your own images.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GreenRiver355FullStackWebDevelopment/javascript-review-brittLiban.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GreenRiver355FullStackWebDevelopment/javascript-review-brittLiban/issues"
+  },
+  "homepage": "https://github.com/GreenRiver355FullStackWebDevelopment/javascript-review-brittLiban#readme",
+  "dependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

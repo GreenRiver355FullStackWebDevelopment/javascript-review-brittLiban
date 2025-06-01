@@ -27,44 +27,75 @@ const reviews = [
 
 //Your Code Below Here////
 
-import calculateStarAverage from './logic.js'
-
-const reviewsSection = document.querySelector(".reviews");
-
-let renderReviews = (review) => {
-
-  let review_container = document.createElement('div');
-  review_container.classList.add("review_container");
+// bring in the average rating function
+import { calculateStarAverage } from './logic.js';
 
 
-  let img = document.createElement('img');
-  img.src = `${review.image}`
-  review_container.append(img);
+// get elements from the DOM
+const reviewsContainer = document.querySelector('.reviews');
 
-  let loopDiv = document.createElement('div');
-  review_container.append(loopDiv);
+const form = document.querySelector('form');
+const starRatingDisplay = document.querySelector('.starRating');
+
+// function to show one review on the page
+function renderReview(review) {
+  const div = document.createElement('div');
+  div.className = 'review_container';
+
+  div.innerHTML = `
+    <img src="${review.image}" />
+    <div>
+      <p>${review.username}</p>
+      <p>${review.star} </p>
+      <p>${review.review}</p>
+    </div>
+  `;
+
+  reviewsContainer.appendChild(div);
+}
+
+// render all reviews
+function renderAllReviews() {
+  reviewsContainer.innerHTML = '';
+  reviews.forEach(renderReview);
+}
+
+// update star average
+function updateStarAverage() {
+  const avg = calculateStarAverage(reviews);
+
+  starRatingDisplay.textContent = `Average Rating: ${avg.toFixed(1)}`;
+}
+
+// handle form submit
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const username = form.username.value;
+  const star = parseFloat(document.querySelector('#star').value);
+
+  const review = form.review.value;
+  const image = form.image.value || './images/default.jpg';
+
+  const newReview = {
+    username,
+    star,
+    review,
+    image
+  };
+
+  reviews.push(newReview);
+  renderReview(newReview);
+  updateStarAverage();
+
+  form.reset();
+});
+
+// initial load
+renderAllReviews();
+updateStarAverage();
 
 
-  let p = document.createElement('p')
-  p.textContent = review.username;
-  loopDiv.append(p);
-
-  let p2 = document.createElement('p');
-  p2.textContent = "It was this many starts --> " + review.star;
-  loopDiv.append(p2);
-
-  let p3 = document.createElement('p');
-  p3.textContent = "Review: " + review.review;
-  loopDiv.append(p3);
-
-  
-  reviewsSection.append(review_container);
-  
-
-};
-
-calculateStarAverage(reviews.map(review => review.star));
-reviews.forEach(renderReviews);
 
 
 
